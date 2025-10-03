@@ -1,1 +1,1 @@
-# Seminar Message Generator
+# Seminar Message Manager
