@@ -1,0 +1,29 @@
+[project]
+authors = [
+  { name = "Gaëtan Serré", email = "gaetan.serre@ens-paris-saclay.fr" },
+  { name = "Gwendal Debaussart-Joniec", email = "gwendal.debaussart@ens-paris-saclay.fr" },
+]
+maintainers = [
+  { name = "Gaëtan Serré", email = "gaetan.serre@ens-paris-saclay.fr" },
+  { name = "Gwendal Debaussart-Joniec", email = "gwendal.debaussart@ens-paris-saclay.fr" },
+]
+name = "seminar-msg"
+dependencies = ["pandas>=2.3.2", "zulip>=0.9.1"]
+description = "A package to automate message generation and sending for seminars from a csv file"
+readme = "README.md"
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = { attr = "seminar_msg.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["seminar_msg"]
+
+[project.urls]
+Repository = "https://github.com/gaetanserre/seminars_msg_gen"
+
+[project.scripts]
+seminar-msg = "seminar_msg.seminar_msg:main"
+
+[build-system]
+requires = ["setuptools", "toml"]
