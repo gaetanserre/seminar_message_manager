@@ -11,6 +11,7 @@ name = "seminar_message_manager"
 dependencies = ["pandas>=2.3.2", "zulip>=0.9.1"]
 description = "A package to automate message generation and sending for seminars from a csv file"
 readme = "README.md"
+license = { file = "LICENSE" }
 dynamic = ["version"]
 
 [tool.setuptools.dynamic]
