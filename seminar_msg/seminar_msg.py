@@ -6,7 +6,7 @@ from .mail_utils import send_email
 
 def cli():
     parser = argparse.ArgumentParser(
-        description="Generate mails for the LIPS seminar series"
+        description="Generate and send mails and Zulip announcement for seminar"
     )
     parser.add_argument("date", type=str, help="Date of the seminar (YYYY-MM-DD)")
 
@@ -17,7 +17,7 @@ def cli():
         help="CSV file containing the seminar data",
     )
     parser.add_argument(
-        "--zulip_secret", type=str, default="zuliprc", help="Zulip bot secret"
+        "--zulip_json", type=str, default="zulip.json", help="Zulip json file"
     )
     parser.add_argument(
         "--mail_json", type=str, default="mail.json", help="Mail json file"
@@ -49,13 +49,12 @@ def main():
     args = cli()
     mail = parse_annoucement(args.date, args.seminar_csv, args.template_mail)
     print(mail)
-    print("\n\033[1;32mMail copied to clipboard\033[0m\n")
     zulip_msg = parse_annoucement(args.date, args.seminar_csv, args.template_zulip)
     print(zulip_msg)
     if args.send:
-        send_email(args.mail_json, "LIPS Seminar Announcement", mail)
+        send_email(args.mail_json, mail)
         print("\n\033[1;32mMail sent\033[0m\n")
 
-        move_old_messages_zulip()
-        send_message_to_zulip(zulip_msg)
+        move_old_messages_zulip(args.zulip_json)
+        send_message_to_zulip(args.zulip_json, zulip_msg)
         print("\n\033[1;32mZulip message sent\033[0m\n")

@@ -1,20 +1,23 @@
 import zulip
-
-channel = "seminars"
-topic = "Seminar Infos"
-old_topic = "OLD - Seminar Infos"
-client = zulip.Client(config_file="./zuliprc")
+import json
 
 
-def move_old_messages_zulip():
-    """Move old messages from the bot in the `Seminar Infos` channel to `OLD - Seminar Infos`."""
+def move_old_messages_zulip(zulip_json):
+    with open(zulip_json, "r") as f:
+        zulip_data = json.load(f)
+
+    client = zulip.Client(config_file=zulip_data["config_file"])
+    bot_email = zulip_data["bot_email"]
+    channel = zulip_data["channel"]
+    topic = zulip_data["topic"]
+    old_topic = zulip_data["old_topic"]
 
     request = {
         "anchor": "newest",
         "num_before": 100,
         "num_after": 0,
         "narrow": [
-            {"operator": "sender", "operand": "lips-seminars-bot@lips.zulipchat.com"},
+            {"operator": "sender", "operand": bot_email},
             {"operator": "channel", "operand": channel},
             {"operator": "topic", "operand": topic},
         ],
@@ -27,15 +30,22 @@ def move_old_messages_zulip():
             "message_id": message_id,
             "topic": old_topic,
         }
-        res = client.update_message(request)
+        client.update_message(request)
     print("Done.")
 
 
-def send_message_to_zulip(msg):
+def send_message_to_zulip(zulip_json, msg):
+    with open(zulip_json, "r") as f:
+        zulip_data = json.load(f)
+
+    client = zulip.Client(config_file=zulip_data["config_file"])
+    channel = zulip_data["channel"]
+    topic = zulip_data["topic"]
+
     request = {
         "type": "stream",
         "to": channel,
         "topic": topic,
         "content": msg,
     }
-    result = client.send_message(request)
+    client.send_message(request)
