@@ -32,14 +32,24 @@ def cli():
         "--template_zulip",
         type=str,
         default="templates/zulip/announcement.md",
-        help="Template zulip message to use",
+        help="Template Zulip message to use",
     )
     parser.add_argument(
         "-s",
         "--send",
         action="store_true",
-        help="Send the message to the Zulip channel (only for announcements)",
+        help="Send the message to the Zulip topic and the mail to the mailing list",
     )
+    parser.add_argument(
+        "-sm", "--send_mail", action="store_true", help="Send the mail to the mailing list"
+    )
+    parser.add_argument(
+        "-sz",
+        "--send_zulip",
+        action="store_true",
+        help="Send the message to the Zulip topic",
+    )
+
 
     args = parser.parse_args()
     return args
@@ -52,9 +62,12 @@ def main():
     zulip_msg = parse_annoucement(args.date, args.seminar_csv, args.template_zulip)
     print(zulip_msg)
     if args.send:
+        args.send_mail = True
+        args.send_zulip = True
+    if args.send_mail:
         send_email(args.mail_json, mail)
         print("\n\033[1;32mMail sent\033[0m\n")
-
+    if args.send_zulip:
         move_old_messages_zulip(args.zulip_json)
         send_message_to_zulip(args.zulip_json, zulip_msg)
         print("\n\033[1;32mZulip message sent\033[0m\n")
