@@ -62,9 +62,9 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
 - `template_zulip` .md file, similar to html file, see [example](templates/zulip/announcement.md)
 By default, the package will look for `announcement.md` in the `./templates/zulip` directory.
 
-- `--send_mail` or `-sm` if used, send mails to the relevant mailing list.
-- `--send_zulip` or `-sz` if used, send messaged to the relevant Zulip topic.
-- `--send`or `-s` if used, send messaged to the relevant Zulip topic and mails.
+- `--send_mail` or `-sm` if used, send message to the relevant mailing list.
+- `--send_zulip` or `-sz` if used, send message to the relevant Zulip topic.
+- `--send`or `-s` if used, send message to the relevant Zulip topic and mails.
 
 ## ⚖️ License
 
