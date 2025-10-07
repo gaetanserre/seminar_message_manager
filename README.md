@@ -15,7 +15,7 @@ pip install seminar-message-manager
 ## 💻 Usage
 
 ```bash
-smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.json --template_mail template.html --template_zulip template.md (--send_mail | -sm) (--send_zulip | -sz) (--send | -s)]
+smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.json --discord_json discord.json --template_mail template.html --template_zulip template.md --template_discord template.md (--send_mail | -sm) (--send_zulip | -sz) (--send | -s)]
 ```
 
 ### Argument details
@@ -51,6 +51,13 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   }
   ```
   By default, the package will look for `mail.json` in the root directory.
+- `discord_json` .json file that describes the information needed by the Discord bot:
+  ```json5
+  {
+    "webhook_url": "https://discord.com/api/webhooks/..."
+  }
+  ```
+  By default, the package will look for `discord.json` in the root directory.
 - `template_mail` .html file that constitute the body of the mail ([example](templates/mail/announcement.html)). Some specific strings, indicated by `{}`, will be replaced by the package, using the corresponding csv line:
   - `{date}`
   - `{room}`
@@ -58,9 +65,14 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   - `{last_name}`
   - `{work_name}`
   - `{work_link}`
+
   By default, the package will look for `announcement.html` in the `./templates/mail` directory.
 - `template_zulip` .md file, similar to html file, see [example](templates/zulip/announcement.md)
-By default, the package will look for `announcement.md` in the `./templates/zulip` directory.
+
+  By default, the package will look for `announcement.md` in the `./templates/zulip` directory.
+- `template_discord` .md file, similar to html file, see [example](templates/discord/announcement.md)
+
+  By default, the package will look for `announcement.md` in the `./templates/discord` directory.
 
 - `--send_mail` or `-sm` if used, send message to the relevant mailing list.
 - `--send_zulip` or `-sz` if used, send message to the relevant Zulip topic.
