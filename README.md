@@ -15,7 +15,7 @@ pip install seminar-message-manager
 ## 💻 Usage
 
 ```bash
-smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.json --discord_json discord.json --template_mail template.html --template_zulip template.md --template_discord template.md (--send_mail | -sm) (--send_zulip | -sz) (--send | -s)]
+smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.json --discord_json discord.json --template_mail template.html --template_zulip template.md --template_discord template.md (--send_mail | -sm) (--send_zulip | -sz) (--send_discord | -sd) (--send | -s)]
 ```
 
 ### Argument details
@@ -76,7 +76,8 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
 
 - `--send_mail` or `-sm` if used, send message to the relevant mailing list.
 - `--send_zulip` or `-sz` if used, send message to the relevant Zulip topic.
-- `--send`or `-s` if used, send message to the relevant Zulip topic and mails.
+- `--send_discord` or `-sd` if used, send message to the relevant Discord channel.
+- `--send`or `-s` if used, send message to the relevant Zulip topic, Discord channel and mails.
 
 ## ⚖️ License
 

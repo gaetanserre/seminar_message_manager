@@ -50,6 +50,12 @@ def cli():
         action="store_true",
         help="Send the message to the Zulip topic",
     )
+    parser.add_argument(
+        "-sd",
+        "--send_discord",
+        action="store_true",
+        help="Send the message to the Discord channel",
+    )
 
 
     args = parser.parse_args()
@@ -63,6 +69,7 @@ def main():
     zulip_msg = parse_annoucement(args.date, args.seminar_csv, args.template_zulip)
     print(zulip_msg)
     discord_msg = parse_annoucement(args.date, args.seminar_csv, args.template_discord)
+    print(discord_msg)
     if args.send:
         args.send_mail = True
         args.send_zulip = True
