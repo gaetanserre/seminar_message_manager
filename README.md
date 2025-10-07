@@ -4,7 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/seminar-message-manager.svg)](https://badge.fury.io/py/seminar-message-manager)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
-A Python manager for automatically generating and sending mails and Zulip messages to announce upcoming seminars, using user-tunable html and markdown templates.
+A Python manager for automatically generating and sending mails, Zulip or Discord messages to announce upcoming seminars, using user-tunable html and markdown templates.
 
 ## 📦 Installation
 
