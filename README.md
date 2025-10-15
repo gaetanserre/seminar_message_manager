@@ -64,7 +64,9 @@ smm date [--seminar_csv csv_file.csv --mail_json mail.json --zulip_json zulip.js
 - `mattermost_json` .json file that describes the information needed by the Mattermost bot:
   ```json5
   {
-    "webhook_url": "https://mattermost.com/hooks/..."
+    "webhook_url": "https://mattermost.com/hooks/...",
+    "username": "My Seminars", // Optional: the username the bot will use
+    "icon_url": "https://image.com/icon.png" // Optional: the icon the bot will use
   }
   ```
   By default, the package will look for `mattermost.json` in the root directory.

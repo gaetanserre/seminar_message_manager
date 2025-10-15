@@ -15,7 +15,8 @@ def send_message_to_mattermost(mattermost_json, message):
     if not mUrl:
         print("Webhook URL not found in JSON file.")
         return
-    data = {"text": message}
+    data.pop("webhook_url", None)
+    data["text"] = message
     response = requests.post(mUrl, json=data)
     print(response.status_code)
     print(response.content)
