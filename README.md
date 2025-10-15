@@ -4,7 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/seminar-message-manager.svg)](https://badge.fury.io/py/seminar-message-manager)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
-A Python manager for automatically generating and sending mails, Zulip or Discord messages to announce upcoming seminars, using user-tunable html and markdown templates.
+A Python manager for automatically generating and sending mails, Zulip, Discord or Mattermost messages to announce upcoming seminars, using user-tunable html and markdown templates.
 
 ## 📦 Installation
 
@@ -15,7 +15,7 @@ pip install seminar-message-manager
 ## 💻 Usage
 
 ```bash
-smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.json --discord_json discord.json --template_mail template.html --template_zulip template.md --template_discord template.md (--send_mail | -sm) (--send_zulip | -sz) (--send_discord | -sd) (--send | -s)]
+smm date [--seminar_csv csv_file.csv --mail_json mail.json --zulip_json zulip.json --discord_json discord.json --mattermost_json mattermost.json --template_mail template.html --template_zulip template.md --template_discord template.md (--send_mail | -sm) (--send_zulip | -sz) (--send_discord | -sd) (--send_mattermost | -smt) (--send | -s)]
 ```
 
 ### Argument details
@@ -28,17 +28,6 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   By default, the package will look for `seminar.csv` in the root directory.
 - `date` the date (yyyy-mm-dd) used to select the relevant information from the csv.
 
-- `zulip_json` .json file that describes the information needed by the Zulip bot:
-  ```json5
-  {
-    "config_file": "zuliprc", // API file of the bot
-    "bot_email"  : "mylab-bot@mylab.zulipchat.com",
-    "channel"    : "Seminars",
-    "topic"      : "Upcomming seminar",
-    "old_topic"  : "Past seminars" // Topic in {channel} where past bot messages are moved
-  }
-  ```
-  By default, the package will look for `zulip.json` in the root directory.
 - `mail_json`.json file that described the mail information
   ```json5
   {
@@ -51,6 +40,19 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   }
   ```
   By default, the package will look for `mail.json` in the root directory.
+
+- `zulip_json` .json file that describes the information needed by the Zulip bot:
+  ```json5
+  {
+    "config_file": "zuliprc", // API file of the bot
+    "bot_email"  : "mylab-bot@mylab.zulipchat.com",
+    "channel"    : "Seminars",
+    "topic"      : "Upcomming seminar",
+    "old_topic"  : "Past seminars" // Topic in {channel} where past bot messages are moved
+  }
+  ```
+  By default, the package will look for `zulip.json` in the root directory.
+
 - `discord_json` .json file that describes the information needed by the Discord bot:
   ```json5
   {
@@ -58,6 +60,15 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   }
   ```
   By default, the package will look for `discord.json` in the root directory.
+
+- `mattermost_json` .json file that describes the information needed by the Mattermost bot:
+  ```json5
+  {
+    "webhook_url": "https://mattermost.com/hooks/..."
+  }
+  ```
+  By default, the package will look for `mattermost.json` in the root directory.
+
 - `template_mail` .html file that constitute the body of the mail ([example](templates/mail/announcement.html)). Some specific strings, indicated by `{}`, will be replaced by the package, using the corresponding csv line:
   - `{date}`
   - `{room}`
@@ -67,17 +78,26 @@ smm date [--seminar_csv csv_file.csv --zulip_json zulip.json --mail_json mail.js
   - `{work_link}`
 
   By default, the package will look for `announcement.html` in the `./templates/mail` directory.
-- `template_zulip` .md file, similar to html file, see [example](templates/zulip/announcement.md)
+- `template_zulip` .md file, similar to html file, see [example](templates/zulip/announcement.md).
 
   By default, the package will look for `announcement.md` in the `./templates/zulip` directory.
-- `template_discord` .md file, similar to html file, see [example](templates/discord/announcement.md)
+- `template_discord` .md file, similar to html file, see [example](templates/discord/announcement.md).
 
   By default, the package will look for `announcement.md` in the `./templates/discord` directory.
 
+- `template_mattermost` .md file, similar to html file, see [example](templates/mattermost/announcement.md).
+
+  By default, the package will look for `announcement.md` in the `./templates/mattermost` directory.
+
 - `--send_mail` or `-sm` if used, send message to the relevant mailing list.
+- 
 - `--send_zulip` or `-sz` if used, send message to the relevant Zulip topic.
+- 
 - `--send_discord` or `-sd` if used, send message to the relevant Discord channel.
-- `--send`or `-s` if used, send message to the relevant Zulip topic, Discord channel and mails.
+
+- `--send_mattermost` or `-smt` if used, send message to the relevant Mattermost channel.
+
+- `--send`or `-s` if used, send message to the relevant Zulip topic, Discord channel, Mattermost channel and mails.
 
 ## ⚖️ License
 
