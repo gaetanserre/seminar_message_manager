@@ -31,12 +31,10 @@ def parse_annoucement(date, seminar_csv, template):
         )
     template = template.replace("{work_name}", temp_rep)
 
-    temp_rep = "ENS Paris-Saclay, room 2U42"
-
     if pd.isna(cur_sem.loc[:, "location"].to_list()[0]):
-        pass
+        temp_rep = ""
     else:
-        temp_rep += "/" + str(cur_sem.loc[:, "location"].to_list()[0])
+        temp_rep = str(cur_sem.loc[:, "location"].to_list()[0])
 
     template = template.replace("{location}", temp_rep)
     return template
