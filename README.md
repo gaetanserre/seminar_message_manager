@@ -22,8 +22,8 @@ smm date [--seminar_csv csv_file.csv --mail_json mail.json --zulip_json zulip.js
 
 - `seminar_csv` .csv file that describes the seminar's events following a specific template:
   ```csv
-  date      ; location; first_name; last_name; work_name           ; work_link
-  yyyy-mm-dd; room    ; John      ; Doe      ; My beautiful article; https://article-link.com
+  date      ; hour  ; location; first_name; last_name; work_name           ; work_link
+  yyyy-mm-dd; hh:mm ; room    ; John      ; Doe      ; My beautiful article; https://article-link.com
   ```
   By default, the package will look for `seminar.csv` in the root directory.
 - `date` the date (yyyy-mm-dd) used to select the relevant information from the csv.
@@ -73,6 +73,7 @@ smm date [--seminar_csv csv_file.csv --mail_json mail.json --zulip_json zulip.js
 
 - `template_mail` .html file that constitute the body of the mail ([example](templates/mail/announcement.html)). Some specific strings, indicated by `{}`, will be replaced by the package, using the corresponding csv line:
   - `{date}`
+  - `{hour}`
   - `{room}`
   - `{first_name}`
   - `{last_name}`

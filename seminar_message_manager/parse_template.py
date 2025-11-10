@@ -8,7 +8,7 @@ def parse_annoucement(date, seminar_csv, template):
     template = open(template, "r").read()
 
     # Create the modified template
-    for s in ["date", "first_name", "last_name"]:
+    for s in ["date", "hour", "first_name", "last_name"]:
         template = template.replace("{" + s + "}", str(cur_sem.loc[:, s].to_list()[0]))
 
     if pd.isna(cur_sem.loc[:, "work_link"].to_list()[0]):
